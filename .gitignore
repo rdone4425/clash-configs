@@ -1,6 +1,2 @@
-node_modules/
-configs/generated*.yaml
-profiles.json
 *.log
-.env
 .DS_Store
