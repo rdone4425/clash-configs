@@ -295,6 +295,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/private.mrs
     path: ./ruleset/private.mrs
     interval: 86400
+    proxy: DIRECT
   ads:
     type: http
     behavior: domain
@@ -302,6 +303,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ads-all.mrs
     path: ./ruleset/ads.mrs
     interval: 86400
+    proxy: DIRECT
   cn:
     type: http
     behavior: domain
@@ -309,6 +311,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/cn.mrs
     path: ./ruleset/cn.mrs
     interval: 86400
+    proxy: DIRECT
   ai-chat:
     type: http
     behavior: domain
@@ -316,6 +319,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-ai-chat-!cn.mrs
     path: ./ruleset/ai-chat.mrs
     interval: 86400
+    proxy: DIRECT
   openai:
     type: http
     behavior: domain
@@ -323,6 +327,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/openai.mrs
     path: ./ruleset/openai.mrs
     interval: 86400
+    proxy: DIRECT
   anthropic:
     type: http
     behavior: domain
@@ -330,6 +335,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/anthropic.mrs
     path: ./ruleset/anthropic.mrs
     interval: 86400
+    proxy: DIRECT
   youtube:
     type: http
     behavior: domain
@@ -337,6 +343,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/youtube.mrs
     path: ./ruleset/youtube.mrs
     interval: 86400
+    proxy: DIRECT
   google:
     type: http
     behavior: domain
@@ -344,6 +351,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.mrs
     path: ./ruleset/google.mrs
     interval: 86400
+    proxy: DIRECT
   twitter:
     type: http
     behavior: domain
@@ -351,6 +359,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/twitter.mrs
     path: ./ruleset/twitter.mrs
     interval: 86400
+    proxy: DIRECT
   facebook:
     type: http
     behavior: domain
@@ -358,6 +367,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/facebook.mrs
     path: ./ruleset/facebook.mrs
     interval: 86400
+    proxy: DIRECT
   instagram:
     type: http
     behavior: domain
@@ -365,6 +375,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/instagram.mrs
     path: ./ruleset/instagram.mrs
     interval: 86400
+    proxy: DIRECT
   netflix:
     type: http
     behavior: domain
@@ -372,6 +383,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/netflix.mrs
     path: ./ruleset/netflix.mrs
     interval: 86400
+    proxy: DIRECT
   disney:
     type: http
     behavior: domain
@@ -379,6 +391,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/disney.mrs
     path: ./ruleset/disney.mrs
     interval: 86400
+    proxy: DIRECT
   spotify:
     type: http
     behavior: domain
@@ -386,6 +399,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/spotify.mrs
     path: ./ruleset/spotify.mrs
     interval: 86400
+    proxy: DIRECT
   twitch:
     type: http
     behavior: domain
@@ -393,6 +407,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/twitch.mrs
     path: ./ruleset/twitch.mrs
     interval: 86400
+    proxy: DIRECT
   telegram:
     type: http
     behavior: domain
@@ -400,6 +415,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/telegram.mrs
     path: ./ruleset/telegram.mrs
     interval: 86400
+    proxy: DIRECT
   apple:
     type: http
     behavior: domain
@@ -407,6 +423,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/apple.mrs
     path: ./ruleset/apple.mrs
     interval: 86400
+    proxy: DIRECT
   microsoft:
     type: http
     behavior: domain
@@ -414,6 +431,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/microsoft.mrs
     path: ./ruleset/microsoft.mrs
     interval: 86400
+    proxy: DIRECT
   games:
     type: http
     behavior: domain
@@ -421,6 +439,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-games.mrs
     path: ./ruleset/games.mrs
     interval: 86400
+    proxy: DIRECT
   github:
     type: http
     behavior: domain
@@ -428,6 +447,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/github.mrs
     path: ./ruleset/github.mrs
     interval: 86400
+    proxy: DIRECT
   dev:
     type: http
     behavior: domain
@@ -435,6 +455,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-dev.mrs
     path: ./ruleset/dev.mrs
     interval: 86400
+    proxy: DIRECT
   crypto:
     type: http
     behavior: domain
@@ -442,6 +463,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-cryptocurrency.mrs
     path: ./ruleset/crypto.mrs
     interval: 86400
+    proxy: DIRECT
   speedtest:
     type: http
     behavior: domain
@@ -449,6 +471,7 @@ rule-providers:
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/speedtest.mrs
     path: ./ruleset/speedtest.mrs
     interval: 86400
+    proxy: DIRECT
 proxy-providers:
   remote:
     type: http
