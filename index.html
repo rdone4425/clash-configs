@@ -230,6 +230,45 @@
 
   .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
+  .generator { margin-bottom: 16px; padding: 18px; }
+  .generator .gen-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+  .generator .gen-head strong { font-size: 14px; }
+  .generator .gen-head span { font-size: 12px; color: var(--muted); }
+  .gen-form { display: grid; grid-template-columns: minmax(0, 1fr) 200px auto; gap: 8px; }
+  .gen-form input {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 9px;
+    background: #0b101b;
+    color: var(--text);
+    font: inherit;
+    font-size: 12.5px;
+  }
+  .gen-form input:focus { outline: none; border-color: rgba(124, 92, 255, 0.65); }
+  .gen-result {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: rgba(34, 211, 238, 0.06);
+  }
+  .gen-link {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12px;
+    word-break: break-all;
+    color: var(--accent-2);
+    text-decoration: none;
+  }
+  .gen-link:hover { text-decoration: underline; }
+  .gen-result .actions { margin-top: 10px; }
+  .gen-error { margin-top: 10px; color: #f87171; font-size: 12.5px; }
+
+  @media (max-width: 720px) {
+    .gen-form { grid-template-columns: 1fr; }
+  }
+
   @media (max-width: 720px) {
     .shell { width: min(100% - 24px, 1040px); padding-top: 32px; }
     .tabs { grid-template-columns: 1fr; }
@@ -246,6 +285,26 @@
     <h1>三份可以直接用的<br><span class="grad">Clash 配置</span></h1>
     <p>标准版带 geosite 规则集，精简版零外部依赖，远程版把节点交给 proxy-providers。点击标签切换，支持复制和下载。</p>
   </header>
+
+  <section class="card generator">
+    <div class="gen-head">
+      <strong>生成远程订阅</strong>
+      <span>填机场订阅地址，节点和规则都保持远程</span>
+    </div>
+    <form class="gen-form" id="gen-form">
+      <input id="gen-url" type="url" placeholder="https://example.com/api/v1/client/subscribe?token=..." required>
+      <input id="gen-token" type="password" placeholder="ACCESS_TOKEN" autocomplete="off" required>
+      <button class="btn primary" id="gen-submit" type="submit">生成</button>
+    </form>
+    <div class="gen-result" id="gen-result" hidden>
+      <a class="gen-link" id="gen-link" target="_blank" rel="noreferrer"></a>
+      <div class="actions">
+        <button class="btn" id="gen-copy" type="button">复制订阅地址</button>
+        <a class="btn" id="gen-open" target="_blank" rel="noreferrer">查看配置</a>
+      </div>
+    </div>
+    <div class="gen-error" id="gen-error" hidden></div>
+  </section>
 
   <nav class="tabs" id="tabs" aria-label="配置文件">
     <button class="tab active" data-key="standard" type="button">
@@ -426,6 +485,89 @@
 
   var initial = location.hash.replace("#", "");
   load(FILES[initial] ? initial : "standard");
+})();
+</script>
+<script>
+(function () {
+  "use strict";
+
+  var WORKER = "https://clash-gateway.rdone.workers.dev";
+  var form = document.getElementById("gen-form");
+  var urlInput = document.getElementById("gen-url");
+  var tokenInput = document.getElementById("gen-token");
+  var submitButton = document.getElementById("gen-submit");
+  var result = document.getElementById("gen-result");
+  var link = document.getElementById("gen-link");
+  var openLink = document.getElementById("gen-open");
+  var copyButton = document.getElementById("gen-copy");
+  var errorBox = document.getElementById("gen-error");
+
+  if (!form) return;
+
+  var savedToken = localStorage.getItem("clash-gateway-token");
+  if (savedToken) tokenInput.value = savedToken;
+
+  function toast(message) {
+    var el = document.getElementById("toast");
+    if (!el) return;
+    el.textContent = message;
+    el.classList.add("show");
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(function () { el.classList.remove("show"); }, 1800);
+  }
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    var url = urlInput.value.trim();
+    var token = tokenInput.value.trim();
+    if (!url || !token) return;
+
+    submitButton.disabled = true;
+    submitButton.textContent = "生成中…";
+    result.hidden = true;
+    errorBox.hidden = true;
+
+    try {
+      var response = await fetch(WORKER + "/api/profiles", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          authorization: "Bearer " + token,
+        },
+        body: JSON.stringify({ url: url }),
+      });
+      var data = await response.json().catch(function () { return {}; });
+      if (!response.ok) throw new Error(data.error || "HTTP " + response.status);
+
+      localStorage.setItem("clash-gateway-token", token);
+      link.textContent = data.subUrl;
+      link.href = data.subUrl;
+      openLink.href = data.subUrl;
+      result.hidden = false;
+      toast("已生成");
+    } catch (error) {
+      errorBox.textContent = "生成失败：" + (error.message || error);
+      errorBox.hidden = false;
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "生成";
+    }
+  });
+
+  copyButton.addEventListener("click", function () {
+    var text = link.textContent;
+    if (!text) return;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () {
+        toast("已复制");
+      }).catch(function () {
+        toast("复制失败");
+      });
+      return;
+    }
+    toast("请手动复制");
+  });
 })();
 </script>
 </body>
