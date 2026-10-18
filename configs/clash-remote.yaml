@@ -227,6 +227,16 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: ⏱️ 测速
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -257,6 +267,10 @@ rules:
   - IP-CIDR6,fe80::/10,🎯 全球直连,no-resolve
   - RULE-SET,private,🎯 全球直连
   - RULE-SET,ads,🛑 广告拦截
+  - RULE-SET,speedtest,⏱️ 测速
+  - DOMAIN-SUFFIX,fast.com,⏱️ 测速
+  - DOMAIN-SUFFIX,librespeed.org,⏱️ 测速
+  - DOMAIN,speed.cloudflare.com,⏱️ 测速
   - RULE-SET,ai-chat,🤖 AI 服务
   - RULE-SET,openai,🤖 AI 服务
   - RULE-SET,anthropic,🤖 AI 服务
@@ -433,6 +447,13 @@ rule-providers:
     format: mrs
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-cryptocurrency.mrs
     path: ./ruleset/crypto.mrs
+    interval: 86400
+  speedtest:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/speedtest.mrs
+    path: ./ruleset/speedtest.mrs
     interval: 86400
 proxy-providers:
   remote:
