@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Clash Configs · 配置模板</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0f19'/%3E%3Cpath d='M20 42 32 18l12 24' fill='none' stroke='%2322d3ee' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --bg: #070a12;
+    --panel: rgba(19, 25, 40, 0.78);
+    --panel-solid: #0f1522;
+    --line: rgba(148, 163, 184, 0.14);
+    --line-strong: rgba(148, 163, 184, 0.26);
+    --text: #e8edf7;
+    --muted: #8b98ad;
+    --faint: #5d6a80;
+    --accent: #7c5cff;
+    --accent-2: #22d3ee;
+    --ok: #34d399;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    color: var(--text);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(620px 400px at 8% -10%, rgba(124, 92, 255, 0.26), transparent 60%),
+      radial-gradient(720px 440px at 94% 2%, rgba(34, 211, 238, 0.14), transparent 62%),
+      radial-gradient(680px 520px at 50% 112%, rgba(124, 92, 255, 0.10), transparent 60%);
+  }
+
+  .shell { width: min(1040px, 100% - 40px); margin: 0 auto; padding: 56px 0 40px; }
+
+  header { text-align: center; margin-bottom: 30px; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.06);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .eyebrow .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ok);
+    box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16);
+  }
+
+  h1 {
+    margin: 16px 0 10px;
+    font-size: clamp(28px, 4.6vw, 44px);
+    line-height: 1.18;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .grad {
+    background: linear-gradient(100deg, #a78bfa 0%, #22d3ee 60%, #67e8f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  header p { margin: 0 auto; max-width: 620px; color: var(--muted); font-size: 14.5px; }
+
+  .tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+
+  .tab {
+    text-align: left;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: rgba(148, 163, 184, 0.04);
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+  }
+
+  .tab strong { display: block; color: var(--text); font-size: 14px; margin-bottom: 2px; }
+  .tab span { font-size: 12px; }
+  .tab:hover { border-color: var(--line-strong); }
+  .tab.active {
+    border-color: rgba(124, 92, 255, 0.55);
+    background: rgba(124, 92, 255, 0.12);
+    color: var(--text);
+  }
+
+  .card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel);
+    box-shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+  }
+
+  .toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+
+  .meta { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .meta .name { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--text); }
+  .meta .stat { font-size: 12px; color: var(--faint); }
+
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 13px;
+    border: 1px solid var(--line-strong);
+    border-radius: 9px;
+    background: rgba(148, 163, 184, 0.07);
+    color: var(--text);
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  .btn:hover { background: rgba(148, 163, 184, 0.14); }
+  .btn.primary { border-color: transparent; background: linear-gradient(110deg, #7c5cff, #4f8cff 60%, #22d3ee); color: #fff; }
+
+  .notice {
+    padding: 9px 18px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(251, 191, 36, 0.06);
+    color: #fbbf24;
+    font-size: 12.5px;
+  }
+
+  .code-wrap { max-height: 62vh; overflow: auto; }
+
+  pre.code {
+    margin: 0;
+    padding: 16px 18px;
+    counter-reset: line;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.65;
+    tab-size: 2;
+  }
+
+  pre.code code { display: block; min-width: max-content; }
+
+  .line {
+    display: block;
+    counter-increment: line;
+    padding-left: 3.4em;
+    position: relative;
+    white-space: pre;
+  }
+
+  .line::before {
+    content: counter(line);
+    position: absolute;
+    left: 0;
+    width: 2.4em;
+    text-align: right;
+    color: #3f4a5d;
+    user-select: none;
+  }
+
+  .line:hover { background: rgba(148, 163, 184, 0.05); }
+
+  .placeholder { padding: 48px 20px; text-align: center; color: var(--muted); font-size: 13.5px; }
+
+  footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 26px;
+    color: var(--faint);
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+
+  footer a { color: var(--muted); text-decoration: none; border-bottom: 1px dashed rgba(148, 163, 184, 0.35); }
+  footer a:hover { color: var(--accent-2); }
+
+  .toast {
+    position: fixed;
+    left: 50%;
+    bottom: 30px;
+    transform: translate(-50%, 16px);
+    padding: 9px 16px;
+    border-radius: 10px;
+    background: #0d1320;
+    border: 1px solid var(--line-strong);
+    color: var(--text);
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, transform 0.2s;
+    z-index: 10;
+  }
+
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  @media (max-width: 720px) {
+    .shell { width: min(100% - 24px, 1040px); padding-top: 32px; }
+    .tabs { grid-template-columns: 1fr; }
+    .toolbar { align-items: flex-start; }
+    .code-wrap { max-height: 58vh; }
+  }
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<main class="shell">
+  <header>
+    <div class="eyebrow"><span class="dot"></span> Clash / Mihomo · 配置模板</div>
+    <h1>三份可以直接用的<br><span class="grad">Clash 配置</span></h1>
+    <p>标准版带 geosite 规则集，精简版零外部依赖，远程版把节点交给 proxy-providers。点击标签切换，支持复制和下载。</p>
+  </header>
+
+  <nav class="tabs" id="tabs" aria-label="配置文件">
+    <button class="tab active" data-key="standard" type="button">
+      <strong>标准配置</strong><span>内联节点 + 规则集</span>
+    </button>
+    <button class="tab" data-key="minimal" type="button">
+      <strong>精简配置</strong><span>只做国内直连</span>
+    </button>
+    <button class="tab" data-key="remote" type="button">
+      <strong>远程配置</strong><span>proxy-providers 拉节点</span>
+    </button>
+  </nav>
+
+  <section class="card">
+    <div class="toolbar">
+      <div class="meta">
+        <span class="name" id="file-name">configs/clash-standard.yaml</span>
+        <span class="stat" id="file-stat"></span>
+      </div>
+      <div class="actions">
+        <button class="btn" id="copy" type="button">复制</button>
+        <a class="btn" id="download" download>下载</a>
+        <a class="btn" id="source" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+    </div>
+    <div class="notice">示例节点使用 203.0.113.x（文档专用地址），不能连通，使用前请替换成自己的节点。</div>
+    <div class="code-wrap" id="wrap">
+      <pre class="code"><code id="code"></code></pre>
+      <div class="placeholder" id="placeholder" hidden>正在加载配置…</div>
+    </div>
+  </section>
+
+  <footer>
+    <span>规则集来自 <a href="https://github.com/MetaCubeX/meta-rules-dat" target="_blank" rel="noreferrer">MetaCubeX/meta-rules-dat</a></span>
+    <span>·</span>
+    <a href="https://github.com/rdone4425/clash-configs" target="_blank" rel="noreferrer">仓库</a>
+  </footer>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var REPO = "https://github.com/rdone4425/clash-configs/blob/main/";
+  var FILES = {
+    standard: {
+      path: "configs/clash-standard.yaml",
+      label: "标准配置"
+    },
+    minimal: {
+      path: "configs/clash-minimal.yaml",
+      label: "精简配置"
+    },
+    remote: {
+      path: "configs/clash-remote.yaml",
+      label: "远程配置"
+    }
+  };
+
+  var tabs = document.querySelectorAll(".tab");
+  var codeEl = document.getElementById("code");
+  var placeholder = document.getElementById("placeholder");
+  var wrap = document.getElementById("wrap");
+  var nameEl = document.getElementById("file-name");
+  var statEl = document.getElementById("file-stat");
+  var downloadEl = document.getElementById("download");
+  var sourceEl = document.getElementById("source");
+  var copyEl = document.getElementById("copy");
+  var toastEl = document.getElementById("toast");
+
+  var cache = {};
+  var current = "standard";
+  var currentText = "";
+  var toastTimer = null;
+
+  function toast(message) {
+    toastEl.textContent = message;
+    toastEl.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 1800);
+  }
+
+  function setActive(key) {
+    current = key;
+    tabs.forEach(function (tab) {
+      tab.classList.toggle("active", tab.getAttribute("data-key") === key);
+    });
+  }
+
+  function render(text) {
+    codeEl.textContent = "";
+    var fragment = document.createDocumentFragment();
+    var lines = text.split("\n");
+    for (var i = 0; i < lines.length; i += 1) {
+      var line = document.createElement("span");
+      line.className = "line";
+      line.textContent = lines[i].length > 0 ? lines[i] : " ";
+      fragment.appendChild(line);
+    }
+    codeEl.appendChild(fragment);
+  }
+
+  function show(text, file) {
+    currentText = text;
+    nameEl.textContent = file.path;
+    statEl.textContent = text.split("\n").length + " 行 · " + (new Blob([text]).size / 1024).toFixed(1) + " KB";
+    downloadEl.href = file.path;
+    downloadEl.setAttribute("download", file.path.split("/").pop());
+    sourceEl.href = REPO + file.path;
+    placeholder.hidden = true;
+    wrap.hidden = false;
+    render(text);
+  }
+
+  async function load(key) {
+    var file = FILES[key];
+    if (!file) return;
+
+    setActive(key);
+    if (location.hash !== "#" + key) {
+      history.replaceState(null, "", "#" + key);
+    }
+
+    if (cache[key]) {
+      show(cache[key], file);
+      return;
+    }
+
+    placeholder.hidden = false;
+    wrap.hidden = true;
+    placeholder.textContent = "正在加载 " + file.path + " …";
+
+    try {
+      var response = await fetch(file.path, { cache: "no-cache" });
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      var text = await response.text();
+      cache[key] = text;
+      if (current === key) show(text, file);
+    } catch (error) {
+      placeholder.hidden = false;
+      wrap.hidden = true;
+      placeholder.textContent = "加载失败：" + (error.message || error) + "（请通过 http(s) 打开页面）";
+    }
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      load(tab.getAttribute("data-key"));
+    });
+  });
+
+  copyEl.addEventListener("click", function () {
+    if (!currentText) return;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(currentText).then(function () {
+        toast("已复制");
+      }).catch(function () {
+        toast("复制失败，请手动选择");
+      });
+      return;
+    }
+    var area = document.createElement("textarea");
+    area.value = currentText;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+    try {
+      document.execCommand("copy");
+      toast("已复制");
+    } catch (error) {
+      toast("复制失败，请手动选择");
+    }
+    document.body.removeChild(area);
+  });
+
+  var initial = location.hash.replace("#", "");
+  load(FILES[initial] ? initial : "standard");
+})();
+</script>
+</body>
+</html>
