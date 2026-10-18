@@ -117,6 +117,16 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: 📘 Meta
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
   - name: 🎬 Netflix
     type: select
     proxies:
@@ -256,6 +266,8 @@ rules:
   - RULE-SET,youtube,▶️ YouTube
   - RULE-SET,google,🔍 谷歌服务
   - RULE-SET,twitter,🐦 X
+  - RULE-SET,facebook,📘 Meta
+  - RULE-SET,instagram,📘 Meta
   - RULE-SET,netflix,🎬 Netflix
   - RULE-SET,disney,🏰 Disney+
   - RULE-SET,spotify,🎵 Spotify
@@ -330,6 +342,20 @@ rule-providers:
     format: mrs
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/twitter.mrs
     path: ./ruleset/twitter.mrs
+    interval: 86400
+  facebook:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/facebook.mrs
+    path: ./ruleset/facebook.mrs
+    interval: 86400
+  instagram:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/instagram.mrs
+    path: ./ruleset/instagram.mrs
     interval: 86400
   netflix:
     type: http

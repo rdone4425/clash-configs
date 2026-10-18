@@ -6,7 +6,7 @@ Clash / Mihomo 配置模板，可直接导入 Clash Verge Rev、Mihomo Party、C
 
 | 文件 | 说明 |
 | --- | --- |
-| `configs/clash-standard.yaml` | 内联节点 + 20 个 geosite 规则集，3 个示例节点 / 21 个组 / 34 条规则 |
+| `configs/clash-standard.yaml` | 内联节点 + 22 个 geosite 规则集，3 个示例节点 / 22 个组 / 36 条规则 |
 | `configs/clash-minimal.yaml` | 精简：只做私有地址和国内直连，不依赖外部规则集 |
 | `configs/clash-remote.yaml` | 远程：`proxies: []`，节点由 `proxy-providers` 定时拉取 |
 
@@ -25,7 +25,7 @@ Clash / Mihomo 配置模板，可直接导入 Clash Verge Rev、Mihomo Party、C
 ## 分组
 
 - 策略组：节点选择 / 自动选择 / 故障转移 / 负载均衡
-- 应用组：AI 服务 / YouTube / 谷歌服务 / X / Netflix / Disney+ / Spotify / 国外媒体 / 电报 / 苹果服务 / 微软服务 / 游戏平台 / 开发服务 / 加密货币
+- 应用组：AI 服务 / YouTube / 谷歌服务 / X / Meta（Facebook + Instagram）/ Netflix / Disney+ / Spotify / 国外媒体 / 电报 / 苹果服务 / 微软服务 / 游戏平台 / 开发服务 / 加密货币
 - 兜底：全球直连 / 广告拦截 / 漏网之鱼
 
 ## 安全
