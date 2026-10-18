@@ -31,6 +31,8 @@ dns:
     - time.*.com
     - ntp.*.com
     - +.pool.ntp.org
+    - +.rdone.eu.cc
+    - +.workers.dev
   default-nameserver:
     - 223.5.5.5
     - 119.29.29.29
