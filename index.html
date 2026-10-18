@@ -234,7 +234,8 @@
   .generator .gen-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
   .generator .gen-head strong { font-size: 14px; }
   .generator .gen-head span { font-size: 12px; color: var(--muted); }
-  .gen-form { display: grid; grid-template-columns: minmax(0, 1fr) 200px auto; gap: 8px; }
+  .gen-form { display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 8px; }
+  .gen-form .wide { grid-column: 1 / -1; }
   .gen-form input {
     width: 100%;
     padding: 9px 12px;
@@ -289,10 +290,10 @@
   <section class="card generator">
     <div class="gen-head">
       <strong>生成远程订阅</strong>
-      <span>填机场订阅地址，节点和规则都保持远程</span>
+      <span>配置模板由 Worker 从 GitHub 拉取；改完 GitHub 里的分组或规则，Clash 刷新订阅即生效</span>
     </div>
     <form class="gen-form" id="gen-form">
-      <input id="gen-url" type="url" placeholder="https://example.com/api/v1/client/subscribe?token=..." required>
+      <input id="gen-url" class="wide" type="url" placeholder="机场订阅 URL（https://...）" required>
       <input id="gen-token" type="password" placeholder="ACCESS_TOKEN" autocomplete="off" required>
       <button class="btn primary" id="gen-submit" type="submit">生成</button>
     </form>
