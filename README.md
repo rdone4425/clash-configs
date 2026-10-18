@@ -18,6 +18,33 @@ Clash / Mihomo 配置模板，可直接导入 Clash Verge Rev、Mihomo Party、C
 
 示例节点使用 `203.0.113.x`（RFC 5737 文档地址），不能连通，使用前替换。
 
+## 本地生成（不保存节点到 GitHub）
+
+脚本在 `scripts/parse-subscription.mjs`，只在本机运行，节点不会提交、不会上传：
+
+```powershell
+npm install
+$env:SUBSCRIPTION_URL = 'https://example.com/sub'
+node scripts/parse-subscription.mjs
+```
+
+生成两个文件：
+
+- `output/clash.yaml`：完整配置，以 `configs/clash-standard.yaml` 为模板，自动替换节点和组引用
+- `output/provider.yaml`：只含 `proxies`，可以直接作为 `proxy-provider` 使用
+
+支持 vmess / vless / trojan / ss / ssr / hysteria2 / tuic / socks5 / http；订阅可以是 Base64、明文链接或 Clash YAML。
+
+| 环境变量 | 默认 | 说明 |
+| --- | --- | --- |
+| `SUBSCRIPTION_URL` | 必填 | 机场订阅地址 |
+| `SUBSCRIPTION_UA` | `v2rayN/6.42` | 拉取订阅的 UA |
+| `TEMPLATE` | `configs/clash-standard.yaml` | 配置模板 |
+| `OUT_DIR` | `output` | 输出目录 |
+
+> 生成的文件包含节点密码 / UUID，已在 `.gitignore` 中忽略，不要提交。
+> 之所以不做成 GitHub Actions：仓库是 public，Actions 的 artifact 和日志对所有人可见，等于公开你的节点。需要定时自动更新的话，应该用私有运行时（比如一个带 token 的 Worker），而不是公共仓库。
+
 ## 规则集
 
 域名规则来自 [MetaCubeX/meta-rules-dat](https://github.com/MetaCubeX/meta-rules-dat) 的 geosite `mrs` 文件，通过 `rule-providers` 下发，Clash 每 24 小时更新一次。首次加载会下载约 1–2 MB。
