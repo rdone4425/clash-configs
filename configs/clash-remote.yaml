@@ -87,6 +87,36 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: ▶️ YouTube
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
+  - name: 🔍 谷歌服务
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
+  - name: 🐦 X
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
   - name: 🌍 国外媒体
     type: select
     proxies:
@@ -183,7 +213,9 @@ rules:
   - RULE-SET,apple,🍎 苹果服务
   - RULE-SET,microsoft,Ⓜ️ 微软服务
   - RULE-SET,telegram,📲 电报
-  - RULE-SET,youtube,🌍 国外媒体
+  - RULE-SET,youtube,▶️ YouTube
+  - RULE-SET,google,🔍 谷歌服务
+  - RULE-SET,twitter,🐦 X
   - RULE-SET,netflix,🌍 国外媒体
   - RULE-SET,disney,🌍 国外媒体
   - RULE-SET,spotify,🌍 国外媒体
@@ -243,6 +275,20 @@ rule-providers:
     format: mrs
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/youtube.mrs
     path: ./ruleset/youtube.mrs
+    interval: 86400
+  google:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/google.mrs
+    path: ./ruleset/google.mrs
+    interval: 86400
+  twitter:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/twitter.mrs
+    path: ./ruleset/twitter.mrs
     interval: 86400
   netflix:
     type: http
