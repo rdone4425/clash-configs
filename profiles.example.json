@@ -1,0 +1,9 @@
+[
+  {
+    "name": "main",
+    "id": "YOUR_PROFILE_ID",
+    "url": "https://clash-sub.rdone.workers.dev/s/YOUR_PROFILE_ID",
+    "subscriptionUrl": "https://example.com/api/v1/client/subscribe?token=xxx",
+    "ruleSet": "standard"
+  }
+]
