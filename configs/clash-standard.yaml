@@ -256,6 +256,17 @@ proxy-groups:
       - 示例-日本
       - 示例-美国
       - DIRECT
+  - name: 💰 加密货币
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - 示例-香港
+      - 示例-日本
+      - 示例-美国
+      - DIRECT
   - name: 🎯 全球直连
     type: select
     proxies:
@@ -302,6 +313,7 @@ rules:
   - RULE-SET,games,🎮 游戏平台
   - RULE-SET,github,🧑‍💻 开发服务
   - RULE-SET,dev,🧑‍💻 开发服务
+  - RULE-SET,crypto,💰 加密货币
   - RULE-SET,cn,🎯 全球直连
   - GEOIP,CN,🎯 全球直连
   - MATCH,🐟 漏网之鱼
@@ -438,4 +450,11 @@ rule-providers:
     format: mrs
     url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-dev.mrs
     path: ./ruleset/dev.mrs
+    interval: 86400
+  crypto:
+    type: http
+    behavior: domain
+    format: mrs
+    url: https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@meta/geo/geosite/category-cryptocurrency.mrs
+    path: ./ruleset/crypto.mrs
     interval: 86400
