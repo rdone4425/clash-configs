@@ -18,6 +18,19 @@ Clash / Mihomo 配置模板，可直接导入 Clash Verge Rev、Mihomo Party、C
 
 示例节点使用 `203.0.113.x`（RFC 5737 文档地址），不能连通，使用前替换。
 
+## 在线生成远程订阅
+
+页面顶部的「生成远程订阅」：填机场订阅地址和 `ACCESS_TOKEN`，点生成，得到：
+
+```
+https://clash-gateway.rdone.workers.dev/s/<id>
+```
+
+把它填进 Clash。节点通过 `/provider/<id>` 远程拉取，规则通过 `rule-providers` 远程加载，配置里不写死节点和规则。
+
+- 订阅地址存在 Cloudflare KV，不写入 GitHub
+- 删除：`DELETE /api/profiles/<id>`（带 token）
+
 ## 本地生成（不保存节点到 GitHub）
 
 脚本在 `scripts/parse-subscription.mjs`，只在本机运行，节点不会提交、不会上传：
