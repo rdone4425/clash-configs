@@ -117,6 +117,36 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: 🎬 Netflix
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
+  - name: 🏰 Disney+
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
+  - name: 🎵 Spotify
+    type: select
+    proxies:
+      - 🚀 节点选择
+      - ♻️ 自动选择
+      - 🔯 故障转移
+      - 🔮 负载均衡
+      - DIRECT
+    use:
+      - remote
   - name: 🌍 国外媒体
     type: select
     proxies:
@@ -216,9 +246,9 @@ rules:
   - RULE-SET,youtube,▶️ YouTube
   - RULE-SET,google,🔍 谷歌服务
   - RULE-SET,twitter,🐦 X
-  - RULE-SET,netflix,🌍 国外媒体
-  - RULE-SET,disney,🌍 国外媒体
-  - RULE-SET,spotify,🌍 国外媒体
+  - RULE-SET,netflix,🎬 Netflix
+  - RULE-SET,disney,🏰 Disney+
+  - RULE-SET,spotify,🎵 Spotify
   - RULE-SET,twitch,🌍 国外媒体
   - RULE-SET,games,🎮 游戏平台
   - RULE-SET,github,🧑‍💻 开发服务
