@@ -76,9 +76,19 @@ proxy-groups:
     lazy: true
     use:
       - remote
+  - name: AI自动
+    type: url-test
+    url: https://chatgpt.com/cdn-cgi/trace
+    expected-status: "200"
+    interval: 300
+    tolerance: 50
+    lazy: true
+    include-all: true
+    hidden: true
   - name: 🤖 AI 服务
     type: select
     proxies:
+      - AI自动
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🔯 故障转移
@@ -86,9 +96,19 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: YouTube自动
+    type: url-test
+    url: https://www.youtube.com/generate_204
+    expected-status: "204"
+    interval: 300
+    tolerance: 50
+    lazy: true
+    include-all: true
+    hidden: true
   - name: ▶️ YouTube
     type: select
     proxies:
+      - YouTube自动
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🔯 故障转移
@@ -146,9 +166,19 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: Spotify自动
+    type: url-test
+    url: https://open.spotify.com/
+    expected-status: "200"
+    interval: 300
+    tolerance: 50
+    lazy: true
+    include-all: true
+    hidden: true
   - name: 🎵 Spotify
     type: select
     proxies:
+      - Spotify自动
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🔯 故障转移
@@ -166,9 +196,19 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: Telegram自动
+    type: url-test
+    url: https://web.telegram.org/a/
+    expected-status: "200"
+    interval: 300
+    tolerance: 50
+    lazy: true
+    include-all: true
+    hidden: true
   - name: 📲 电报
     type: select
     proxies:
+      - Telegram自动
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🔯 故障转移
@@ -206,9 +246,19 @@ proxy-groups:
       - 🔮 负载均衡
     use:
       - remote
+  - name: Dev自动
+    type: url-test
+    url: https://github.com
+    expected-status: "200"
+    interval: 300
+    tolerance: 50
+    lazy: true
+    include-all: true
+    hidden: true
   - name: 🧑‍💻 开发服务
     type: select
     proxies:
+      - Dev自动
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🔯 故障转移
@@ -216,9 +266,19 @@ proxy-groups:
       - DIRECT
     use:
       - remote
+  - name: Crypto自动
+    type: url-test
+    url: https://api.binance.com/api/v3/ping
+    expected-status: "200"
+    interval: 300
+    tolerance: 50
+    lazy: true
+    include-all: true
+    hidden: true
   - name: 💰 加密货币
     type: select
     proxies:
+      - Crypto自动
       - 🚀 节点选择
       - ♻️ 自动选择
       - 🔯 故障转移
