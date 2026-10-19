@@ -1,11 +1,15 @@
 {
   "name": "clash-configs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "Clash / Mihomo 配置模板与订阅解析脚本",
+  "description": "Clash 订阅网关 + 配置模板（GitHub Pages + Cloudflare Workers）",
   "scripts": {
-    "generate": "node scripts/parse-subscription.mjs"
+    "generate": "node scripts/parse-subscription.mjs",
+    "gateway:install": "npm --prefix gateway install",
+    "gateway:dev": "npm --prefix gateway run dev",
+    "gateway:deploy": "npm --prefix gateway run deploy",
+    "gateway:test": "node gateway/test.mjs"
   },
   "dependencies": {
     "yaml": "^2.9.1"
